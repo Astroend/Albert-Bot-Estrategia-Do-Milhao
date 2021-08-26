@@ -1,4 +1,4 @@
-# ASTROEND
+# BRH BOT
 
 # Extern Funcions
 
@@ -40,21 +40,21 @@ if __name__ == '__main__':
     return_dict = manager.dict()
     jobs = []
 
-    astroend, window_login, pop_up, window_option, window_trading, window_finalize = layouts.window_astroend(), None, None, None, None, None
+    astroend, window_login, pop_up, window_option, window_trading, window_finalize = layouts.window_BRH_BOT(), None, None, None, None, None
 
     while True:
 
         window, event, values = sg.read_all_windows(timeout=25)
 
-        if window == astroend and event == sg.WIN_CLOSED:
+        if window == BRH BOT and event == sg.WIN_CLOSED:
             break
 
-        if window == astroend and event == 'TERMOS':
+        if window == BRH BOT and event == 'TERMOS':
             link = Process(target= functions.open_link)
             link.start()
             link_state = True
 
-        if window == astroend and event == 'ACEITO OS TERMOS':
+        if window == BRH BOT and event == 'ACEITO OS TERMOS':
             if link_state == True:
                 link.terminate()
             astroend.close()
@@ -80,7 +80,7 @@ if __name__ == '__main__':
         if window == window_option and event == sg.WIN_CLOSED:
             break
 
-        if window == window_option and event == 'Operar':
+        if window == window_option and event == 'Operate':
             account.type('PRACTICE' if values['account_practice'] else 'REAL')
             account.option('BINARY' if values['option_binary'] else 'DIGITAL')
             account.favourable('MAJORITY' if values['favourable_majority'] else 'MINORITY')
@@ -112,11 +112,11 @@ if __name__ == '__main__':
             break
         if operating_state:
             window_trading['-balance-'].update(f"Banca: {account.get_balance}")
-            window_trading['-status-'].update('Meta batida' if account.get_balance >= account.get_stop_win_complete else 'Stop atingido' if account.get_balance <= account.get_stop_loss_complete else f'Trabalhando ...' if account.get_balance > 0 else 'Sem fundos.')
+            window_trading['-status-'].update('Your Goal Hit' if account.get_balance >= account.get_stop_win_complete else 'Stop Hit' if account.get_balance <= account.get_stop_loss_complete else f'Working ...' if account.get_balance > 0 else 'Sem fundos.')
 
-        if window == window_trading and event == 'Finalizar':
+        if window == window_trading and event == 'Finalize':
             operating_state = False
-            print('Código Finalizado')
+            print('Mission Completed')
             trading_.terminate()  
             try:
                 if not txt_state: 
